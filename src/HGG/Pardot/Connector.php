@@ -307,7 +307,7 @@ class Connector
         $httpCodes = null;
         $curlCodes = null;
 
-        $client = new Client($this->baseUrl);
+        $client = new Client(['base_uri' => $this->baseUrl]);
 
         return $client;
     }
@@ -338,10 +338,12 @@ class Connector
         $options = $this->httpClientOptions;
 
         try {
-            $httpResponse = $this->client->post($url, $headers, $postBody, $options)
-                ->setHeader('Content-Type', 'application/x-www-form-urlencoded')
-                ->setBody(http_build_query($parameters))
-                ->send();
+            $httpResponse = $this->client->post($url, [
+                'body' => http_build_query($parameters, null, '&'),
+                'headers' => [
+                    'Content-Type' => 'application/x-www-form-urlencoded'
+                ]
+            ]);
         } catch (HttpException $e) {
             $msg = sprintf('%s. Http status code [%s]', $e->getMessage(), $e->getResponse()->getStatusCode());
 
@@ -387,7 +389,7 @@ class Connector
 
         switch ($this->format) {
         case 'json':
-            $this->rawResponse = $response->json();
+            $this->rawResponse = json_decode($response->getBody(), true);
             $handler = new JsonResponseHandler($this->rawResponse, $object);
             break;
         case 'xml':
