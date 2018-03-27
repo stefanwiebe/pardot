@@ -10,10 +10,9 @@ use HGG\Pardot\Exception\RuntimeException;
 use HGG\Pardot\Exception\AuthenticationErrorException;
 use HGG\Pardot\Exception\RequestException;
 
-use Guzzle\Http\Client;
-use Guzzle\Plugin\Backoff\BackoffPlugin;
-use Guzzle\Http\Exception\BadResponseException;
-use Guzzle\Http\Exception\GuzzleException;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\BadResponseException;
+use GuzzleHttp\Exception\GuzzleException;
 use HGG\ParameterValidator\Validator\ArrayValidator;
 use Icecave\Collections\Map;
 
@@ -308,9 +307,7 @@ class Connector
         $httpCodes = null;
         $curlCodes = null;
 
-        $plugin = BackoffPlugin::getExponentialBackoff($retries, $httpCodes, $curlCodes);
         $client = new Client($this->baseUrl);
-        $client->addSubscriber($plugin);
 
         return $client;
     }
