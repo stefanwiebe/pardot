@@ -63,9 +63,14 @@ class JsonResponseHandler extends AbstractResponseHandler
      */
     protected function parseMultiRecordResult($objectName, $data)
     {
-        $this->resultCount = (int) $data['result']['total_results'];
+        // Data requested in the bulk-output-format does not include total_results.
+        if (isset($data['result']['total_results'])) {
+            $this->resultCount = (int) $data['result']['total_results'];
+        } else {
+            $this->resultCount = null;
+        }
 
-        if (0 === $this->resultCount) {
+        if (isset($this->resultCount) && 0 === $this->resultCount) {
             $this->result = array();
         } else {
             if (array_key_exists($objectName, $data['result'])) {
@@ -182,4 +187,3 @@ class JsonResponseHandler extends AbstractResponseHandler
         return $object;
     }
 }
-

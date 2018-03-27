@@ -1,20 +1,23 @@
 {
-    "name": "hgg/pardot",
+    "name": "sw/pardot",
     "type": "library",
-    "description": "Pardot API library for building custom CRM connectors",
+    "description": "A Pardot-API-Wrapper for PHP.",
     "keywords": [ "pardot", "salesforce", "api", "rest", "json", "xml" ],
-    "homepage": "http://github.com/hglattergotz/pardot",
+    "homepage": "https://github.com/stefanwiebe/pardot",
     "license": "MIT",
     "authors": [
         {
             "name": "Henning Glatter-Götz",
             "email": "henning@glatter-gotz.com",
             "homepage": "http://glatter-gotz.com"
+        },
+        {
+            "name": "Stefan Wiebe"
         }
     ],
     "require": {
         "php": ">=5.3.3",
-        "guzzle/guzzle": ">=3.2.0",
+        "guzzlehttp/guzzle": ">=6.3.2",
         "hgg/parameter-validator": "0.1.*",
         "icecave/collections": "1.0.0"
     },
