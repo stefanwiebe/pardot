@@ -44,6 +44,8 @@ class JsonResponseHandler extends AbstractResponseHandler
             } elseif (array_key_exists('api_key', $this->data)) {
                 $this->resultCount = 0;
                 $this->result = $this->data['api_key'];
+			} elseif (array_key_exists('stats', $this->data)) {
+				$this->result = $this->data['stats'];
             } else {
                 $asString = true;
                 throw new RuntimeException('Unknown response format: '.$this->responseObj->getBoby($asString));
