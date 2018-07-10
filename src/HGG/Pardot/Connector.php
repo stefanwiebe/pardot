@@ -2,6 +2,7 @@
 
 namespace HGG\Pardot;
 
+use Cascade\Cascade;
 use HGG\Pardot\ResponseHandler\JsonResponseHandler;
 use HGG\Pardot\ResponseHandler\XmlResponseHandler;
 use HGG\Pardot\Exception\ExceptionInterface;
